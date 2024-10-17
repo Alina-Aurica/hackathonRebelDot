@@ -9,7 +9,7 @@ class UserDTO(Schema):
     name = fields.Str(required=True, validate=validate.Length(min=1))
     email = fields.Str(required=True, validate=validate.Regexp('^[a-zA-Z0-9_. +-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$'))
     password = fields.Str(required=True, validate=validate.Length(min=5))
-    birthday = fields.Date(required=True, validate=validate.Range(min=date.today()))
+    birthdate = fields.Date(required=True, validate=validate.Range(max=date.today()))
     country = fields.Str(required=True, validate=validate.Length(min=1))
     maternal_language = fields.Str(required=True, validate=validate.Length(min=1))
     foreign_language = fields.Str(required=True, validate=validate.Length(min=1))

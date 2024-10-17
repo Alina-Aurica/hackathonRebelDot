@@ -48,3 +48,7 @@ class UserRepository:
     @staticmethod
     def find_user_by_email_and_password(email, password):
         return User.query.filter_by(email=email, password=password).first()
+
+    @staticmethod
+    def find_all_users():
+        return User.query.all()

@@ -16,8 +16,8 @@ def create_app():
 
     CORS(app, resources={r"/*": {"origins": "http://localhost:4200"}})
 
-    # from .controller.userController import user_controller
-    # app.register_blueprint(user_controller)
+    from .controller.user_controller import user_controller
+    app.register_blueprint(user_controller)
     # from .controller.destinationController import destination_controller
     # app.register_blueprint(destination_controller)
     # from .controller.reservationController import reservation_controller

@@ -15,6 +15,7 @@ class UserService:
         user_new = User(name=user_data.get('name'),
                         email=user_data.get('email'),
                         password=hashed_password,
+                        birthdate=user_data.get('birthdate'),
                         country=user_data.get('country'),
                         maternal_language=user_data.get('maternal_language'),
                         foreign_language = user_data.get('foreign_language')
@@ -35,3 +36,11 @@ class UserService:
     @staticmethod
     def get_user_by_email_and_password(email, password):
         return UserRepository.find_user_by_email_and_password(email, password)
+
+    @staticmethod
+    def get_all_user(id_user):
+        users = []
+        for user in UserRepository.find_all_users():
+            if user.id != id_user:
+                users.append(user)
+        return [user.repr() for user in users]
