@@ -22,7 +22,7 @@ def create_app():
     # app.register_blueprint(destination_controller)
     # from .controller.reservationController import reservation_controller
     # app.register_blueprint(reservation_controller)
-    # from .controller.authController import auth_controller
-    # app.register_blueprint(auth_controller)
+    from .controller.auth_controller import auth_controller
+    app.register_blueprint(auth_controller)
 
     return app

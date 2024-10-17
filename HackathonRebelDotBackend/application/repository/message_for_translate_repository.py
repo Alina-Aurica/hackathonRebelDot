@@ -1,8 +1,8 @@
 from application import db
-from application.model.models import User
+from application.model.models import User, MessageForTranslate
 
 
-class MessageFroTranslateRepository:
+class MessageForTranslateRepository:
     @staticmethod
     def add_message(message):
         db.session.add(message)
@@ -11,7 +11,7 @@ class MessageFroTranslateRepository:
 
     @staticmethod
     def delete_message(id_message):
-        message = User.query.get(id_message)
+        message = MessageForTranslate.query.get(id_message)
         if message:
             db.session.delete(message)
             db.session.commit()
@@ -20,7 +20,7 @@ class MessageFroTranslateRepository:
 
     @staticmethod
     def update_message(id_message, data):
-        message = User.query.get(id_message)
+        message = MessageForTranslate.query.get(id_message)
         if message:
             message.name = data.get('message', message.message)
             db.session.commit()

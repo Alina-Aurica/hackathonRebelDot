@@ -11,14 +11,14 @@ class User(db.Model):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
-    photo = db.Column(db.String(), nullable=False) # trebuie sa ma uit dupa formatul de poza
+    photo = db.Column(db.String(), nullable=True) # trebuie sa ma uit dupa formatul de poza
     name = db.Column(db.String(), nullable=False)
     email = db.Column(db.String(), unique=True, nullable=False)
     password = db.Column(db.String(), nullable=False)
     birthdate = db.Column(db.Date, nullable=False, default=date.today)
     country = db.Column(db.String(), nullable=False)
     maternal_language = db.Column(db.String(), nullable=False)
-    foreign_language = db.Column(db.String(), nullable=False)
+    foreign_language = db.Column(db.String(), nullable=True)
 
     # role = db.Column(Enum(Role, name='role', create_type=False), default=Role.NORMAL_USER)
 
@@ -42,7 +42,8 @@ class MessageForTranslate(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     id_sender = db.Column(db.Integer, db.ForeignKey('users.id'))
     id_receiver = db.Column(db.Integer, db.ForeignKey('users.id'))
-    message = db.Column(db.String(), nullable=False)
+    original_message = db.Column(db.String(), nullable=False)
+    translated_message = db.Column(db.String(), nullable=False)
     message_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     source_language = db.Column(db.String(), nullable=False)
     target_language = db.Column(db.String(), nullable=False)
@@ -52,29 +53,30 @@ class MessageForTranslate(db.Model):
             "id": self.id,
             "id_sender": self.id_sender,
             "id_receiver": self.id_receiver,
-            "message": self.message,
+            "original_message": self.original_message,
+            "translated_message": self.translated_message,
             "message_date": self.message_date,
             "source_language": self.source_language,
             "target_language": self.target_language
         }
 
 
-class MessageTranslated(db.Model):
-    __tablename__ = 'messages_translated'
-
-    id = db.Column(db.Integer, primary_key=True)
-    id_sender = db.Column(db.Integer, db.ForeignKey('users.id'))
-    id_receiver = db.Column(db.Integer, db.ForeignKey('users.id'))
-    message = db.Column(db.String(), nullable=False)
-    original_message = db.Column(db.String(), nullable=False)
-    message_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-
-    def repr(self):
-        return {
-            "id": self.id,
-            "id_sender": self.id_sender,
-            "id_receiver": self.id_receiver,
-            "message": self.message,
-            "original_message": self.original_message,
-            "message_date": self.message_date
-        }
+# class MessageTranslated(db.Model):
+#     __tablename__ = 'messages_translated'
+#
+#     id = db.Column(db.Integer, primary_key=True)
+#     id_sender = db.Column(db.Integer, db.ForeignKey('users.id'))
+#     id_receiver = db.Column(db.Integer, db.ForeignKey('users.id'))
+#     message = db.Column(db.String(), nullable=False)
+#     original_message = db.Column(db.String(), nullable=False)
+#     message_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+#
+#     def repr(self):
+#         return {
+#             "id": self.id,
+#             "id_sender": self.id_sender,
+#             "id_receiver": self.id_receiver,
+#             "message": self.message,
+#             "original_message": self.original_message,
+#             "message_date": self.message_date
+#         }
