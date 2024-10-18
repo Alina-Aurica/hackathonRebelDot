@@ -11,7 +11,7 @@ class User(db.Model):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
-    photo = db.Column(db.String(), nullable=True) # trebuie sa ma uit dupa formatul de poza
+    photo = db.Column(db.String(), nullable=True)
     name = db.Column(db.String(), nullable=False)
     email = db.Column(db.String(), unique=True, nullable=False)
     password = db.Column(db.String(), nullable=False)
@@ -19,8 +19,6 @@ class User(db.Model):
     country = db.Column(db.String(), nullable=False)
     maternal_language = db.Column(db.String(), nullable=False)
     foreign_language = db.Column(db.String(), nullable=True)
-
-    # role = db.Column(Enum(Role, name='role', create_type=False), default=Role.NORMAL_USER)
 
     def repr(self):
         return {
@@ -44,9 +42,9 @@ class MessageForTranslate(db.Model):
     id_sender = db.Column(db.Integer, db.ForeignKey('users.id'))
     id_receiver = db.Column(db.Integer, db.ForeignKey('users.id'))
     original_message = db.Column(db.String(), nullable=False)
-    translated_message = db.Column(db.String(), nullable=False)
+    translated_message = db.Column(db.String(), nullable=True)
     message_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    source_language = db.Column(db.String(), nullable=False)
+    source_language = db.Column(db.String(), nullable=True)
     target_language = db.Column(db.String(), nullable=False)
 
     def repr(self):

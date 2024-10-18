@@ -12,4 +12,4 @@ class UserDTO(Schema):
     birthdate = fields.Date(required=True, validate=validate.Range(max=date.today()))
     country = fields.Str(required=True, validate=validate.Length(min=1))
     maternal_language = fields.Str(required=True, validate=validate.Length(min=1))
-    foreign_language = fields.Str(required=True, validate=validate.Length(min=1))
+    foreign_language = fields.Str(required=False, validate=validate.Length(min=1))

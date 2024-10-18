@@ -18,10 +18,8 @@ def create_app():
 
     from .controller.user_controller import user_controller
     app.register_blueprint(user_controller)
-    # from .controller.destinationController import destination_controller
-    # app.register_blueprint(destination_controller)
-    # from .controller.reservationController import reservation_controller
-    # app.register_blueprint(reservation_controller)
+    from .controller.message_controller import message_controller
+    app.register_blueprint(message_controller)
     from .controller.auth_controller import auth_controller
     app.register_blueprint(auth_controller)
 
